@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { DEFAULT_PLAYER_SIZE_PX } from './Player.types'
 
 /**
  * Component that is used to render an individual "player" in the game, not controllable -- just a visual representation
@@ -9,24 +10,13 @@ export function Player({ x, y }: ComponentProps) {
   const style = useMemo(() => {
     return {
       transform: `translate(${x}px, ${y}px)`,
+      height: `${DEFAULT_PLAYER_SIZE_PX}px`,
+      width: `${DEFAULT_PLAYER_SIZE_PX}px`,
     }
   }, [x, y])
 
-  return (
-    <div
-      style={style}
-      className={`${BASE_CLASSES} ${REGULAR_VERSION_CLASSES}`}
-    />
-  )
+  return <div style={style} className={`rounded-full bg-green-800`} />
 }
-
-const BASE_CLASSES = 'h-4 w-4 rounded-full'
-
-// Classes that style the "default" version of the component
-const REGULAR_VERSION_CLASSES = 'bg-green-800'
-
-// Classes that style the "alt" version of the component
-const ALT_VERSION_CLASSES = 'bg-green-200'
 
 interface ComponentProps {
   /** X position of the player */

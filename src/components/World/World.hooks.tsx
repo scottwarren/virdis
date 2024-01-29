@@ -1,6 +1,9 @@
 import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
 import { useEffect, useState } from 'react'
-import { DEFAULT_PLAYER_VELOCITY_PER_FRAME } from '../Player/Player.types'
+import {
+  DEFAULT_PLAYER_SIZE_PX,
+  DEFAULT_PLAYER_VELOCITY_PER_FRAME,
+} from '../Player/Player.types'
 
 /**
  * Hook that returns the current frame time
@@ -27,27 +30,30 @@ export function useGameLoop(frameTime: number) {
 
   useEffect(() => {
     const gameLoopID = window.setInterval(() => {
-      // Calculate each player's new position
+      // Calculate each player's new position and velocity
       players.forEach((player) => {
         const [x, y] = player.position
         const [xVelocity, yVelocity] = player.velocity
 
-        const isPlayerOutOfBounds = isOutOfBounds(x, y)
+        const isPlayerOutOfBoundsForX = isOutOfBoundsForX(x)
+        const isPlayerOutOfBoundsForY = isOutOfBoundsForY(y)
 
-        if (isPlayerOutOfBounds) {
-          // Invert the velocity
-          const newXVelocity = xVelocity * -1
-          const newYVelocity = yVelocity * -1
+        const newXVelocity = isPlayerOutOfBoundsForX
+          ? xVelocity * -1
+          : xVelocity
+        const newYVelocity = isPlayerOutOfBoundsForY
+          ? yVelocity * -1
+          : yVelocity
 
-          updatePlayerVelocity(player.id, [newXVelocity, newYVelocity])
-        }
+        // Trigger an update of the player's velocity within the game state
+        updatePlayerVelocity(player.id, [newXVelocity, newYVelocity])
 
         const xMovement = xVelocity * frameTime
         const yMovement = yVelocity * frameTime
 
-        const newX = isPlayerOutOfBounds ? x - xMovement : x + xMovement
+        const newX = isPlayerOutOfBoundsForX ? x - xMovement : x + xMovement
 
-        const newY = isPlayerOutOfBounds ? y - yMovement : y + yMovement
+        const newY = isPlayerOutOfBoundsForY ? y - yMovement : y + yMovement
 
         updatePlayerPosition(player.id, [newX, newY])
       })
@@ -67,17 +73,35 @@ const TICKS_PER_SECOND = 60
 const TICKS_PER_FRAME = 1000 / TICKS_PER_SECOND
 
 /**
- * Function used to determine whether a player is out of bounds.
+ * Function used to determine whether a player is out of bounds on the X axis.
  */
-function isOutOfBounds(x: number, y: number) {
-  const xMax = document.body.clientWidth
-  const yMax = document.body.clientHeight
+function isOutOfBoundsForX(x: number) {
+  const xMin = 0
+  const xMax = document.body.clientHeight - DEFAULT_PLAYER_SIZE_PX
 
-  if (x > xMax || y > yMax) {
+  if (x > xMax) {
     return true
   }
 
-  if (x < 0 || y < 0) {
+  if (x < xMin) {
+    return true
+  }
+
+  return false
+}
+
+/**
+ * Function used to determine whether a player is out of bounds on the y axis.
+ */
+function isOutOfBoundsForY(y: number) {
+  const yMin = 0
+  const yMax = document.body.clientWidth - DEFAULT_PLAYER_SIZE_PX
+
+  if (y > yMax) {
+    return true
+  }
+
+  if (y < yMin) {
     return true
   }
 
