@@ -3,6 +3,8 @@ export interface PlayerI {
   id: string
   /** X,Y position of the player. */
   position: [number, number]
+  /** The player's score. */
+  score: number
 }
 
 // Allows the update of any player property, except for the ID
