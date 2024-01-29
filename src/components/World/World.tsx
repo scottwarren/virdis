@@ -1,6 +1,5 @@
+import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
 import { Player } from '../Player/Player'
-
-import { useGameState } from '@/state/GameState/GameStateProvider'
 
 export function World() {
   const { players } = useGameState()
