@@ -20,5 +20,5 @@ const ALT_VERSION_CLASSES = 'bg-green-200'
 
 interface ComponentProps {
   /** Whether or not to render the alt version of the component */
-  alt: boolean
+  alt?: boolean
 }
