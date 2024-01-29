@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
-import { DEFAULT_PLAYER_VELOCITY_PER_FRAME, PlayerI } from './Player.types'
+import { DEFAULT_PLAYER_VELOCITY_PER_TICK, PlayerI } from './Player.types'
 
 export function usePlayer(): UsePlayerReturnI {
   const idRef = useRef<string>(uuidv4())
@@ -9,8 +9,8 @@ export function usePlayer(): UsePlayerReturnI {
   const [position, setPosition] = useState<[number, number]>([0, 0])
   const [score, setScore] = useState<number>(0)
   const [velocity, setVelocity] = useState<[number, number]>([
-    DEFAULT_PLAYER_VELOCITY_PER_FRAME,
-    DEFAULT_PLAYER_VELOCITY_PER_FRAME,
+    DEFAULT_PLAYER_VELOCITY_PER_TICK,
+    DEFAULT_PLAYER_VELOCITY_PER_TICK,
   ])
 
   return {

@@ -2,7 +2,7 @@ import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
 import { useEffect, useState } from 'react'
 import {
   DEFAULT_PLAYER_SIZE_PX,
-  DEFAULT_PLAYER_VELOCITY_PER_FRAME,
+  DEFAULT_PLAYER_VELOCITY_PER_TICK,
 } from '../Player/Player.types'
 
 /**
@@ -48,8 +48,8 @@ export function useGameLoop(frameTime: number) {
         // Trigger an update of the player's velocity within the game state
         updatePlayerVelocity(player.id, [newXVelocity, newYVelocity])
 
-        const xMovement = xVelocity * frameTime
-        const yMovement = yVelocity * frameTime
+        const xMovement = DEFAULT_PLAYER_VELOCITY_PER_TICK * xVelocity
+        const yMovement = DEFAULT_PLAYER_VELOCITY_PER_TICK * yVelocity
 
         const newX = isPlayerOutOfBoundsForX ? x - xMovement : x + xMovement
 

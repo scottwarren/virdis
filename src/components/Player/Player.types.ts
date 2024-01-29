@@ -12,7 +12,7 @@ export interface PlayerI {
 // Allows the update of any player property, except for the ID
 export type PlayerUpdateT = Partial<Omit<PlayerI, 'id'>>
 
-// Default velocity per frame
-export const DEFAULT_PLAYER_VELOCITY_PER_FRAME = 0.01
+// Amount of movement applied to the player per tick
+export const DEFAULT_PLAYER_VELOCITY_PER_TICK = 2
 
 export const DEFAULT_PLAYER_SIZE_PX = 16
