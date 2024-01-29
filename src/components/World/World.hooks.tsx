@@ -57,7 +57,7 @@ export function useGameLoop(frameTime: number) {
 
         updatePlayerPosition(player.id, [newX, newY])
       })
-    }, TICKS_PER_FRAME)
+    }, SECONDS_PER_TICK)
 
     if (gameOver) {
       window.clearInterval(gameLoopID)
@@ -70,7 +70,7 @@ export function useGameLoop(frameTime: number) {
 const TICKS_PER_SECOND = 60
 
 // 16.66666667 ticks per second for 60fps
-const TICKS_PER_FRAME = 1000 / TICKS_PER_SECOND
+const SECONDS_PER_TICK = 1000 / TICKS_PER_SECOND
 
 /**
  * Function used to determine whether a player is out of bounds on the X axis.
