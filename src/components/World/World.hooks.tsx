@@ -1,9 +1,8 @@
 import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
 import { useEffect, useState } from 'react'
-import {
-  DEFAULT_PLAYER_SIZE_PX,
-  DEFAULT_PLAYER_VELOCITY_PER_TICK,
-} from '../Player/Player.types'
+import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '../Player/Player.types'
+import { SECONDS_PER_TICK } from './World.constants'
+import { isOutOfBoundsForX, isOutOfBoundsForY } from './World.helpers'
 
 /**
  * Hook that returns the current frame time
@@ -65,45 +64,4 @@ export function useGameLoop(frameTime: number) {
 
     return () => window.clearInterval(gameLoopID)
   }, [frameTime, gameOver, players, updatePlayerPosition, updatePlayerVelocity])
-}
-
-const TICKS_PER_SECOND = 60
-
-// 16.66666667 ticks per second for 60fps
-const SECONDS_PER_TICK = 1000 / TICKS_PER_SECOND
-
-/**
- * Function used to determine whether a player is out of bounds on the X axis.
- */
-function isOutOfBoundsForX(x: number) {
-  const xMin = 0
-  const xMax = document.body.clientWidth
-
-  if (x > xMax) {
-    return true
-  }
-
-  if (x < xMin) {
-    return true
-  }
-
-  return false
-}
-
-/**
- * Function used to determine whether a player is out of bounds on the y axis.
- */
-function isOutOfBoundsForY(y: number) {
-  const yMin = 0
-  const yMax = document.body.clientHeight
-
-  if (y > yMax) {
-    return true
-  }
-
-  if (y < yMin) {
-    return true
-  }
-
-  return false
 }
