@@ -1,4 +1,4 @@
-import { Loop } from '@/components/game/loop'
+import { Loop } from '@/components/game/Loop'
 import Image from 'next/image'
 
 export default function Home() {
