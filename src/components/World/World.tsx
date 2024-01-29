@@ -8,7 +8,7 @@ export function World() {
   useGameLoop(frameTime)
 
   return (
-    <div className='flex min-h-screen w-screen bg-green-200'>
+    <div className='flex min-h-screen w-screen'>
       {players.map((player) => {
         const [x, y] = player.position
         return <Player key={player.id} x={x} y={y} />
