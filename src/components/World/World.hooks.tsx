@@ -77,7 +77,7 @@ const SECONDS_PER_TICK = 1000 / TICKS_PER_SECOND
  */
 function isOutOfBoundsForX(x: number) {
   const xMin = 0
-  const xMax = document.body.clientHeight - DEFAULT_PLAYER_SIZE_PX
+  const xMax = document.body.clientWidth
 
   if (x > xMax) {
     return true
@@ -95,7 +95,7 @@ function isOutOfBoundsForX(x: number) {
  */
 function isOutOfBoundsForY(y: number) {
   const yMin = 0
-  const yMax = document.body.clientWidth - DEFAULT_PLAYER_SIZE_PX
+  const yMax = document.body.clientHeight
 
   if (y > yMax) {
     return true
