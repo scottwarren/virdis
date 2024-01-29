@@ -3,7 +3,7 @@
 import { createContext, useCallback, useMemo, useState } from 'react'
 
 import { GameStateI, INITIAL_STATE } from './GameState.types'
-import { PlayerI, PlayerUpdateT } from '@/components/Player/Player.types'
+import { PlayerUpdateT } from '@/components/Player/Player.types'
 import { UsePlayerReturnI, usePlayer } from '@/components/Player/Player.hooks'
 
 export const GameStateContext = createContext<GameStateI>(INITIAL_STATE)
