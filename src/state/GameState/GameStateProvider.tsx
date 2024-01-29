@@ -1,9 +1,9 @@
 'use client'
 
-import { createContext, useMemo } from 'react'
+import { createContext, useCallback, useMemo, useState } from 'react'
 
 import { GameStateI, INITIAL_STATE } from './GameState.types'
-import { PlayerI } from '@/components/Player/Player.types'
+import { PlayerI, PlayerUpdateT } from '@/components/Player/Player.types'
 import { UsePlayerReturnI, usePlayer } from '@/components/Player/Player.hooks'
 
 export const GameStateContext = createContext<GameStateI>(INITIAL_STATE)
@@ -13,6 +13,7 @@ export const GameStateContext = createContext<GameStateI>(INITIAL_STATE)
  */
 export function GameStateProvider({ children }: ComponentProps) {
   const player1 = usePlayer()
+  const [gameOver, setGameOver] = useState(false)
 
   const players = useMemo((): Record<string, UsePlayerReturnI> => {
     return {
@@ -20,9 +21,39 @@ export function GameStateProvider({ children }: ComponentProps) {
     }
   }, [player1])
 
+  const updatePlayer = useCallback(
+    (id: string, update: PlayerUpdateT) => {
+      const player = players[id]
+
+      if (!player) {
+        return console.error(`Player with id ${id} not found`)
+      }
+
+      if (update.position) {
+        player.updatePlayerPosition(update.position)
+      }
+
+      if (update.velocity) {
+        player.updatePlayerVelocity(update.velocity)
+      }
+    },
+    [players],
+  )
+
   const state = useMemo((): GameStateI => {
     return {
       players: [player1.player],
+      gameOver,
+      setGameOver,
+      updatePlayerVelocity: (id: string, velocity: [number, number]) => {
+        const player = players[id]
+
+        if (!player) {
+          return console.error(`Player with id ${id} not found`)
+        }
+
+        player.updatePlayerVelocity(velocity)
+      },
       updatePlayerPosition: (id: string, position: [number, number]) => {
         const player = players[id]
 
@@ -33,7 +64,7 @@ export function GameStateProvider({ children }: ComponentProps) {
         player.updatePlayerPosition(position)
       },
     }
-  }, [player1.player, players])
+  }, [gameOver, player1.player, players])
 
   return (
     <GameStateContext.Provider value={state}>
