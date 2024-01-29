@@ -1,4 +1,4 @@
-import { Player } from '@/components/Player1'
+import { Player } from '@/components/Player'
 
 /**
  * The component that handles rendering and updating the game.
