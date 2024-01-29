@@ -19,6 +19,6 @@ const REGULAR_VERSION_CLASSES = 'bg-green-800'
 const ALT_VERSION_CLASSES = 'bg-green-200'
 
 interface ComponentProps {
-  /** Whether or not to render the alt version of the component */
+  /** Whether or not to render the alt version of the component. Defaults to false */
   alt?: boolean
 }
