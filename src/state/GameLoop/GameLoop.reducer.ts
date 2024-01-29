@@ -1,6 +1,6 @@
 import { Update } from 'next/dist/build/swc'
 import { GameLoopStateI } from './GameLoop.types'
-import { PlayerUpdateT } from '../Player/Player.types'
+import { PlayerUpdateT } from '../../components/Player/Player.types'
 import { Reducer } from 'react'
 
 export function gameStateReducer(
@@ -20,7 +20,7 @@ export function gameStateReducer(
   return state
 }
 
-type ValidActions = UpdateScoreAction | UpdatePlayerAction
+export type ValidActions = UpdateScoreAction | UpdatePlayerAction
 
 type UpdateScoreAction = {
   type: 'update_score'
