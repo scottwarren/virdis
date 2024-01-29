@@ -1,12 +1,12 @@
 import { Update } from 'next/dist/build/swc'
-import { GameLoopStateI } from './GameLoop.types'
+import { GameStateI } from './GameState.types'
 import { PlayerUpdateT } from '../../components/Player/Player.types'
 import { Reducer } from 'react'
 
 export function gameStateReducer(
-  state: GameLoopStateI,
+  state: GameStateI,
   action: ValidActions,
-): GameLoopStateI {
+): GameStateI {
   switch (action.type) {
     case 'update_score':
       const newScore: [number, number] = [...state.score]
@@ -42,4 +42,4 @@ type UpdatePlayerPayload = {
   playerUpdate: PlayerUpdateT
 }
 
-export type ReducerT = Reducer<GameLoopStateI, ValidActions>
+export type ReducerT = Reducer<GameStateI, ValidActions>

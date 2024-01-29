@@ -1,4 +1,4 @@
-export interface Player {
+export interface PlayerI {
   /** ID of the player. */
   id: string
   /** X,Y position of the player. */
@@ -6,4 +6,4 @@ export interface Player {
 }
 
 // Allows the update of any player property, except for the ID
-export type PlayerUpdateT = Partial<Omit<Player, 'id'>>
+export type PlayerUpdateT = Partial<Omit<PlayerI, 'id'>>

@@ -21,4 +21,8 @@ const ALT_VERSION_CLASSES = 'bg-green-200'
 interface ComponentProps {
   /** Whether or not to render the alt version of the component. Defaults to false */
   alt?: boolean
+  /** X position of the player */
+  x: number
+  /** Y position of the player */
+  y: number
 }
