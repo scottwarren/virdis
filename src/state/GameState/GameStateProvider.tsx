@@ -39,13 +39,6 @@ export function GameStateProvider({ children }: ComponentProps) {
   )
 }
 
-/**
- * Hook that's used to access the game state.
- */
-export function useGameState() {
-  return useContext(GameStateContext)
-}
-
 interface ComponentProps {
   children: React.ReactNode
 }
