@@ -8,7 +8,7 @@ export function Loop() {
     <div className='flex h-full w-full bg-green-200 '>
       <div>
         <Player />
-        <Player />
+        <Player alt />
       </div>
     </div>
   )
