@@ -50,8 +50,10 @@ export function useGameLoop(frameTime: number) {
         const xMovement = DEFAULT_PLAYER_VELOCITY_PER_TICK * xVelocity
         const yMovement = DEFAULT_PLAYER_VELOCITY_PER_TICK * yVelocity
 
+        // If the player is out of bounds, then we are essentially inverting its movement
+        // on the axis that it is out of bounds. Uses the velocity to determine _how much_ it needs to move
+        // in that direction.
         const newX = isPlayerOutOfBoundsForX ? x - xMovement : x + xMovement
-
         const newY = isPlayerOutOfBoundsForY ? y - yMovement : y + yMovement
 
         updatePlayerPosition(player.id, [newX, newY])
