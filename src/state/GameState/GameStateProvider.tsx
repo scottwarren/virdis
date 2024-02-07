@@ -3,7 +3,8 @@
 
 import { createContext, useCallback, useMemo, useState } from 'react'
 
-import { GameStateI, INITIAL_STATE } from './GameState.types'
+import { GameStateI } from '@/models/GameState/GameState'
+import { INITIAL_STATE } from './GameState.constants'
 import { PlayerUpdateT } from '@/models/Player/Player'
 import { UsePlayerReturnI, usePlayer } from '@/components/Player/Player.hooks'
 

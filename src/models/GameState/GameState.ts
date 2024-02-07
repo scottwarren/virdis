@@ -15,18 +15,3 @@ export interface GameStateI {
   /** Function used to set the game over state. */
   setGamePaused: (gamePaused: boolean) => void
 }
-
-export const INITIAL_STATE: GameStateI = {
-  players: [],
-  blocks: [],
-  updatePlayerPosition: () => {
-    throw new Error('updatePlayerPosition() not implemented')
-  },
-  gamePaused: false,
-  setGamePaused: () => {
-    throw new Error('setGamePaused() not implemented')
-  },
-  updatePlayerVelocity: () => {
-    throw new Error('updatePlayerVelocity() not implemented')
-  },
-}
