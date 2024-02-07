@@ -1,12 +1,8 @@
 export interface BlockI {
-  /** ID of the player. */
+  /** ID of the block. */
   id: string
-  /** X,Y position of the player. */
+  /** X,Y position of the block. */
   position: [number, number]
-  /** The player's score. */
-  score: number
-  /** Player's velocity. X, Y */
-  velocity: [number, number]
 }
 
 // The width/height of a block.
