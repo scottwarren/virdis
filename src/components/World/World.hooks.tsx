@@ -28,7 +28,7 @@ export function useGameLoop(frameTime: number) {
     useGameState()
 
   useEffect(() => {
-    const gameLoopID = window.setInterval(() => {
+    const gameLoopIntervalID = window.setInterval(() => {
       // Calculate each player's new position and velocity
       players.forEach((player) => {
         const [x, y] = player.position
@@ -58,11 +58,12 @@ export function useGameLoop(frameTime: number) {
       })
     }, SECONDS_PER_TICK)
 
-      window.clearInterval(gameLoopID)
     if (gamePaused) {
+      window.clearInterval(gameLoopIntervalID)
     }
 
-    return () => window.clearInterval(gameLoopID)
+    // Cleanup the timeout upon unmount to prevent memory leaks.
+    return () => window.clearInterval(gameLoopIntervalID)
   }, [
     frameTime,
     gamePaused,
