@@ -5,8 +5,9 @@ import { PlayerI } from '../../models/Player/Player'
 import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '@/models/Player/Player'
 import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
 
-  const idRef = useRef<string>(uuidv4())
 export function usePlayer() {
+  // The ref to store the ID of the player.
+  const idRef = useRef(uuidv4())
 
   const [position, setPosition] = useState<[number, number]>([
     X_EDGE_BUFFER,
