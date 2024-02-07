@@ -13,7 +13,7 @@ export const GameStateContext = createContext<GameStateI>(INITIAL_STATE)
  */
 export function GameStateProvider({ children }: ComponentProps) {
   const player1 = usePlayer()
-  const [gameOver, setGameOver] = useState(false)
+  const [gamePaused, setGamePaused] = useState(false)
 
   const players = useMemo((): Record<string, UsePlayerReturnI> => {
     return {
@@ -43,8 +43,8 @@ export function GameStateProvider({ children }: ComponentProps) {
   const state = useMemo((): GameStateI => {
     return {
       players: [player1.player],
-      gameOver,
-      setGameOver,
+      gamePaused,
+      setGamePaused,
       updatePlayerVelocity: (id: string, velocity: [number, number]) => {
         const player = players[id]
 
@@ -64,7 +64,7 @@ export function GameStateProvider({ children }: ComponentProps) {
         player.updatePlayerPosition(position)
       },
     }
-  }, [gameOver, player1.player, players])
+  }, [gamePaused, player1.player, players])
 
   return (
     <GameStateContext.Provider value={state}>

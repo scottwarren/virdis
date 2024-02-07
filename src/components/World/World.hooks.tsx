@@ -24,7 +24,7 @@ export function useFrameTime() {
 }
 
 export function useGameLoop(frameTime: number) {
-  const { players, updatePlayerPosition, updatePlayerVelocity, gameOver } =
+  const { players, updatePlayerPosition, updatePlayerVelocity, gamePaused } =
     useGameState()
 
   useEffect(() => {
@@ -58,10 +58,16 @@ export function useGameLoop(frameTime: number) {
       })
     }, SECONDS_PER_TICK)
 
-    if (gameOver) {
       window.clearInterval(gameLoopID)
+    if (gamePaused) {
     }
 
     return () => window.clearInterval(gameLoopID)
-  }, [frameTime, gameOver, players, updatePlayerPosition, updatePlayerVelocity])
+  }, [
+    frameTime,
+    gamePaused,
+    players,
+    updatePlayerPosition,
+    updatePlayerVelocity,
+  ])
 }

@@ -3,7 +3,7 @@ import { Player } from '../Player/Player'
 import { useFrameTime, useGameLoop } from './World.hooks'
 
 export function World() {
-  const { players, setGameOver } = useGameState()
+  const { players, setGamePaused, gamePaused } = useGameState()
   const frameTime = useFrameTime()
   useGameLoop(frameTime)
 
@@ -14,7 +14,12 @@ export function World() {
         return <Player key={player.id} x={x} y={y} />
       })}
       <div className='flex flex-row justify-end'>
-        <button onClick={() => setGameOver(true)}>End Game</button>
+        <button
+          className='text-white'
+          onClick={() => setGamePaused(!gamePaused)}
+        >
+          {gamePaused ? 'Continue game' : 'Pause Game'}
+        </button>
       </div>
     </div>
   )
