@@ -1,5 +1,5 @@
 import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
-import { Player } from '../Player/Player'
+import { Player } from '@/components/Player/Player'
 import { useFrameTime, useGameLoop } from './World.hooks'
 import { Block } from '@/components/Block/Block'
 
