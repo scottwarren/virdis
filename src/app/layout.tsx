@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   description: 'UI for Virdis',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en'>
       <body className={inter.className}>{children}</body>
     </html>
   )
 }
+
+type RootLayoutProps = Readonly<{
+  children: React.ReactNode
+}>
