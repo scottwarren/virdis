@@ -5,8 +5,8 @@ import { PlayerI } from '../../models/Player/Player'
 import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '@/models/Player/Player'
 import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
 
-export function usePlayer(): UsePlayerReturnI {
   const idRef = useRef<string>(uuidv4())
+export function usePlayer() {
 
   const [position, setPosition] = useState<[number, number]>([
     X_EDGE_BUFFER,
@@ -18,17 +18,20 @@ export function usePlayer(): UsePlayerReturnI {
     DEFAULT_PLAYER_VELOCITY_PER_TICK,
   ])
 
-  return {
-    player: {
-      position,
-      id: idRef.current,
-      score,
-      velocity,
-    },
-    updatePlayerPosition: setPosition,
-    updatePlayerScore: setScore,
-    updatePlayerVelocity: setVelocity,
-  }
+  return useMemo(
+    (): UsePlayerReturnI => ({
+      player: {
+        position,
+        id: idRef.current,
+        score,
+        velocity,
+      },
+      updatePlayerPosition: setPosition,
+      updatePlayerScore: setScore,
+      updatePlayerVelocity: setVelocity,
+    }),
+    [position, score, velocity],
+  )
 }
 
 export interface UsePlayerReturnI {
