@@ -1,11 +1,8 @@
 import { useMemo, useRef, useState } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
-import {
-  DEFAULT_PLAYER_SIZE_PX,
-  DEFAULT_PLAYER_VELOCITY_PER_TICK,
-  PlayerI,
-} from './Player.types'
+import { PlayerI } from './Player.types'
+import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from './Player.constants'
 import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '../World/World.constants'
 
 export function usePlayer(): UsePlayerReturnI {

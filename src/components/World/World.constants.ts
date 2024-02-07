@@ -1,4 +1,4 @@
-import { DEFAULT_PLAYER_SIZE_PX } from '../Player/Player.types'
+import { DEFAULT_PLAYER_SIZE_PX } from '../Player/Player.constants'
 
 export const TICKS_PER_SECOND = 60
 

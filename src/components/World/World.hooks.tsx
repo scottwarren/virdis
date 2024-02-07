@@ -1,6 +1,6 @@
 import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
 import { useEffect, useState } from 'react'
-import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '../Player/Player.types'
+import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '../Player/Player.constants'
 import { SECONDS_PER_TICK } from './World.constants'
 import { isOutOfBoundsForX, isOutOfBoundsForY } from './World.helpers'
 
