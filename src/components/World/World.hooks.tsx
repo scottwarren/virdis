@@ -50,9 +50,8 @@ export function useGameLoop(frameTime: number) {
         const xMovement = DEFAULT_PLAYER_VELOCITY_PER_TICK * xVelocity
         const yMovement = DEFAULT_PLAYER_VELOCITY_PER_TICK * yVelocity
 
-        // If the player is out of bounds, then we are essentially inverting its movement
-        // on the axis that it is out of bounds. Uses the velocity to determine _how much_ it needs to move
-        // in that direction.
+        // If the player is out of bounds, we want to invert its direction of movement
+        // on the axis that it is out of bounds
         const newX = isPlayerOutOfBoundsForX ? x - xMovement : x + xMovement
         const newY = isPlayerOutOfBoundsForY ? y - yMovement : y + yMovement
 
@@ -60,6 +59,7 @@ export function useGameLoop(frameTime: number) {
       })
     }, SECONDS_PER_TICK)
 
+    // This means the game loop won't run
     if (gamePaused) {
       window.clearInterval(gameLoopIntervalID)
     }
