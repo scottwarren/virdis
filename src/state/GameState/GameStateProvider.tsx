@@ -3,7 +3,7 @@
 import { createContext, useCallback, useMemo, useState } from 'react'
 
 import { GameStateI, INITIAL_STATE } from './GameState.types'
-import { PlayerUpdateT } from '@/components/Player/Player.types'
+import { PlayerUpdateT } from '@/models/Player/Player'
 import { UsePlayerReturnI, usePlayer } from '@/components/Player/Player.hooks'
 
 export const GameStateContext = createContext<GameStateI>(INITIAL_STATE)
@@ -44,6 +44,7 @@ export function GameStateProvider({ children }: ComponentProps) {
     return {
       players: [player1.player],
       gamePaused,
+      blocks: [],
       setGamePaused,
       updatePlayerVelocity: (id: string, velocity: [number, number]) => {
         const player = players[id]
