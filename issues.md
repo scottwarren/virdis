@@ -1,0 +1,7 @@
+- [ ] Add blocks within the world
+- [ ] Add collision detection
+- [ ] Upon collision detection
+  - [ ] Remove block from world
+  - [ ] Add to the score of the player who collided with the block.
+- [ ] Add additional player
+- [ ] Refactor players to a better fitting name
