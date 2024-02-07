@@ -36,6 +36,10 @@ export function GameStateProvider({ children }: ComponentProps) {
       if (update.velocity) {
         player.updatePlayerVelocity(update.velocity)
       }
+
+      if (update.score) {
+        player.updatePlayerScore(update.score)
+      }
     },
     [players],
   )
