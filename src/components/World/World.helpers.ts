@@ -1,4 +1,4 @@
-import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from './World.constants'
+import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
 
 /**
  * Function used to determine whether a player is out of bounds on the X axis.

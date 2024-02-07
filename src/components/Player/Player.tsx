@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { DEFAULT_PLAYER_SIZE_PX } from './Player.constants'
+import { DEFAULT_PLAYER_SIZE_PX } from '@/models/Player/Player'
 
 /**
  * Component that is used to render an individual "player" in the game, not controllable -- just a visual representation

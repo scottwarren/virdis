@@ -1,5 +1,5 @@
 import { Player } from '../Player/Player'
-import { PlayerI } from '../Player/Player.types'
+import { PlayerI } from '../../models/Player/Player'
 
 export function Players({ players }: ComponentProps) {
   return players.map((player) => {
