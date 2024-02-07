@@ -1,3 +1,4 @@
+// Need this in order to use React Context, but also the UI itself needs to update on the client side for the "animation" of the state to work.
 'use client'
 
 import { createContext, useCallback, useMemo, useState } from 'react'
