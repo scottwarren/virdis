@@ -10,6 +10,7 @@ const Component = ({ x, y }: ComponentProps) => {
   const styles = useMemo(() => {
     return {
       ...DEFAULT_STYLES,
+      // Using transform here to prevent layout shifts (or repaints, can't remember which) (which position: absolute; left: x, top: y would cause)
       transform: `translate(${x}px, ${y}px)`,
     }
   }, [x, y])
