@@ -14,7 +14,8 @@ const Component = ({ x, y }: ComponentProps) => {
       transform: `translate(${x}px, ${y}px)`,
     }
   }, [x, y])
-  return <div style={styles} className='bg-red-900' />
+
+  return <div style={styles} className='flex bg-red-900' />
 }
 
 const DEFAULT_STYLES = {
