@@ -7,6 +7,7 @@ import { GameStateI } from '@/models/GameState/GameState'
 import { INITIAL_STATE } from './GameState.constants'
 import { PlayerUpdateT } from '@/models/Player/Player'
 import { UsePlayerReturnI, usePlayer } from '@/components/Player/Player.hooks'
+import { generateBlocks } from '@/models/Block/Block'
 
 export const GameStateContext = createContext<GameStateI>(INITIAL_STATE)
 
@@ -15,7 +16,9 @@ export const GameStateContext = createContext<GameStateI>(INITIAL_STATE)
  */
 export function GameStateProvider({ children }: ComponentProps) {
   const player1 = usePlayer()
+
   const [gamePaused, setGamePaused] = useState(false)
+  const blocks = useMemo(() => generateBlocks(1), [])
 
   const players = useMemo((): Record<string, UsePlayerReturnI> => {
     return {
@@ -50,7 +53,7 @@ export function GameStateProvider({ children }: ComponentProps) {
     return {
       players: [player1.player],
       gamePaused,
-      blocks: [],
+      blocks,
       setGamePaused,
       updatePlayerVelocity: (id: string, velocity: [number, number]) => {
         const player = players[id]
@@ -71,7 +74,7 @@ export function GameStateProvider({ children }: ComponentProps) {
         player.updatePlayerPosition(position)
       },
     }
-  }, [gamePaused, player1.player, players])
+  }, [gamePaused, blocks, player1.player, players])
 
   return (
     <GameStateContext.Provider value={state}>
