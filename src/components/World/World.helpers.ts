@@ -1,3 +1,4 @@
+import { DEFAULT_BLOCK_SIZE } from '@/models/Block/Block'
 import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
 
 /**
@@ -36,6 +37,29 @@ export function isPlayerOutOfBoundsForY(y: number) {
   }
 
   if (y < yMin) {
+    return true
+  }
+
+  return false
+}
+
+/**
+ * Function used to detect if a player is interacting with a block.
+ *
+ * @returns Boolean
+ */
+export function blockHitDetection(
+  [playerX, playerY]: [number, number],
+  [blockX, blockY]: [number, number],
+) {
+  const blockXEnd = blockX + DEFAULT_BLOCK_SIZE
+  const blockYEnd = blockY + DEFAULT_BLOCK_SIZE
+
+  if (playerX >= blockX && playerX <= blockXEnd) {
+    return true
+  }
+
+  if (playerY >= blockYEnd && playerY <= blockYEnd) {
     return true
   }
 
