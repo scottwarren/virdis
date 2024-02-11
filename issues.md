@@ -1,5 +1,5 @@
-- [ ] Add blocks within the world
-- [ ] Add collision detection
+- [x] Add blocks within the world
+- [ ] Add collision detection for blocks
 - [ ] Upon collision detection
   - [ ] Remove block from world
   - [ ] Add to the score of the player who collided with the block.
