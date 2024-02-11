@@ -17,7 +17,7 @@ export function generateBlocks(numberOfBlocks: number) {
   const blocks: BlockI[] = []
 
   for (let i = 0; i < numberOfBlocks; i++) {
-    const position: BlockI['position'] = [50, 80]
+    const position: BlockI['position'] = [450, 480]
 
     const newBlock: BlockI = {
       id: uuidv4(),
