@@ -2,7 +2,10 @@ import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
 import { useEffect, useState } from 'react'
 import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '@/models/Player/Player'
 import { SECONDS_PER_TICK } from '@/models/World/World'
-import { isOutOfBoundsForX, isOutOfBoundsForY } from './World.helpers'
+import {
+  isPlayerOutOfBoundsForX,
+  isPlayerOutOfBoundsForY,
+} from './World.helpers'
 
 /**
  * Hook that returns the current frame time
@@ -34,15 +37,19 @@ export function useGameLoop(frameTime: number) {
         const [x, y] = player.position
         const [xVelocity, yVelocity] = player.velocity
 
-        const isPlayerOutOfBoundsForX = isOutOfBoundsForX(x)
-        const isPlayerOutOfBoundsForY = isOutOfBoundsForY(y)
+        const outOfBoundsX = isPlayerOutOfBoundsForX(x)
+        const outOfBoundsY = isPlayerOutOfBoundsForY(y)
 
-        const newXVelocity = isPlayerOutOfBoundsForX
-          ? xVelocity * -1
-          : xVelocity
-        const newYVelocity = isPlayerOutOfBoundsForY
-          ? yVelocity * -1
-          : yVelocity
+        const newXVelocity = outOfBoundsX ? xVelocity * -1 : xVelocity
+        const newYVelocity = outOfBoundsY ? yVelocity * -1 : yVelocity
+
+        // TODO: determine whether the player is hitting a block
+        // If it currently is, we need to figure out _which block it was hitting to remove it
+        // once we determine the ID/which block we're hitting, remove it from the state
+
+        // TODO: extract the out of bounds checks into their own function
+        // so that we can check first out of bounds, then we can check if they're hitting
+        // an entity
 
         // Trigger an update of the player's velocity within the game state
         updatePlayerVelocity(player.id, [newXVelocity, newYVelocity])
@@ -52,8 +59,8 @@ export function useGameLoop(frameTime: number) {
 
         // If the player is out of bounds, we want to invert its direction of movement
         // on the axis that it is out of bounds
-        const newX = isPlayerOutOfBoundsForX ? x - xMovement : x + xMovement
-        const newY = isPlayerOutOfBoundsForY ? y - yMovement : y + yMovement
+        const newX = outOfBoundsX ? x - xMovement : x + xMovement
+        const newY = outOfBoundsY ? y - yMovement : y + yMovement
 
         updatePlayerPosition(player.id, [newX, newY])
       })

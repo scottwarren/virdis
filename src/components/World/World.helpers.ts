@@ -5,7 +5,7 @@ import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
  *
  * @params x {Number} position on the screen on the x axis, used for out of bounds check.
  */
-export function isOutOfBoundsForX(x: number) {
+export function isPlayerOutOfBoundsForX(x: number) {
   const xMin = 0
 
   const xMax = document.body.clientWidth - X_EDGE_BUFFER
@@ -26,7 +26,7 @@ export function isOutOfBoundsForX(x: number) {
  *
  * @params y {Number} position on the screen on the y axis, used for out of bounds check.
  */
-export function isOutOfBoundsForY(y: number) {
+export function isPlayerOutOfBoundsForY(y: number) {
   const yMin = 0
 
   const yMax = document.body.clientHeight - Y_EDGE_BUFFER
