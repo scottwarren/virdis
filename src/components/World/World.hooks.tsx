@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '@/models/Player/Player'
 import { SECONDS_PER_TICK } from '@/models/World/World'
 import {
+  blockHitDetection,
   isPlayerOutOfBoundsForX,
   isPlayerOutOfBoundsForY,
 } from './World.helpers'
@@ -27,8 +28,13 @@ export function useFrameTime() {
 }
 
 export function useGameLoop(frameTime: number) {
-  const { players, updatePlayerPosition, updatePlayerVelocity, gamePaused } =
-    useGameState()
+  const {
+    blocks,
+    players,
+    updatePlayerPosition,
+    updatePlayerVelocity,
+    gamePaused,
+  } = useGameState()
 
   useEffect(() => {
     const gameLoopIntervalID = window.setInterval(() => {
@@ -36,6 +42,20 @@ export function useGameLoop(frameTime: number) {
       players.forEach((player) => {
         const [x, y] = player.position
         const [xVelocity, yVelocity] = player.velocity
+
+        blocks.forEach((block) => {
+          const isPlayerHittingBlock = blockHitDetection(
+            player.position,
+            block.position,
+          )
+
+          if (!isPlayerHittingBlock) {
+            return
+          }
+
+          // delete the block
+          // invert the velocity
+        })
 
         const outOfBoundsX = isPlayerOutOfBoundsForX(x)
         const outOfBoundsY = isPlayerOutOfBoundsForY(y)

@@ -17,7 +17,12 @@ export function GameStateProvider({ children }: ComponentProps) {
   const player1 = usePlayer()
 
   const [gamePaused, setGamePaused] = useState(false)
-  const blocks = useMemo(() => generateBlocks(1), [])
+  const [blocks, setBlocks] = useState(generateBlocks(1))
+  const handleDeleteBlock = useCallback((id: string) => {
+    setBlocks((blocks) => {
+      return blocks.filter((block) => block.id !== id)
+    })
+  }, [])
 
   const players = useMemo((): Record<string, UsePlayerReturnI> => {
     return {
@@ -52,6 +57,7 @@ export function GameStateProvider({ children }: ComponentProps) {
     return {
       players: [player1.player],
       gamePaused,
+      deleteBlock: handleDeleteBlock,
       blocks,
       setGamePaused,
       updatePlayerVelocity: (id: string, velocity: [number, number]) => {

@@ -14,4 +14,6 @@ export interface GameStateI {
   updatePlayerVelocity: (id: string, velocity: [number, number]) => void
   /** Function used to set the game over state. */
   setGamePaused: (gamePaused: boolean) => void
+  /** Function used to remove a block from the state. */
+  deleteBlock: (id: string) => void
 }
