@@ -14,7 +14,12 @@ export function Player({ x, y }: ComponentProps) {
     }
   }, [x, y])
 
-  return <div style={style} className={`rounded-full bg-green-800`} />
+  return (
+    <div
+      style={style}
+      className={`w[${DEFAULT_PLAYER_SIZE_PX}px] h[${DEFAULT_PLAYER_SIZE_PX}px] rounded-full bg-green-800`}
+    />
+  )
 }
 
 const DEFAULT_STYLES = {
