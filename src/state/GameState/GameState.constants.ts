@@ -2,7 +2,7 @@ import { GameStateI } from '@/models/GameState/GameState'
 
 export const INITIAL_STATE: GameStateI = {
   blocks: [],
-  deleteBlock: (id: string) => {
+  deleteBlock: () => {
     throw new Error('deleteBlock() not implemented')
   },
   gamePaused: false,

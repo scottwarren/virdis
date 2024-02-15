@@ -4,9 +4,9 @@ import { createContext, useCallback, useMemo, useState } from 'react'
 
 import { GameStateI } from '@/models/GameState/GameState'
 import { INITIAL_STATE } from './GameState.constants'
-import { PlayerUpdateT } from '@/models/Player/Player'
 import { UsePlayerReturnI, usePlayer } from '@/components/Player/Player.hooks'
 import { generateBlocks } from '@/models/Block/Block'
+import { BlockI } from '@/models/Block/Block'
 
 export const GameStateContext = createContext<GameStateI>(INITIAL_STATE)
 
@@ -19,7 +19,7 @@ export function GameStateProvider({ children }: ComponentProps) {
   const [gamePaused, setGamePaused] = useState(false)
   const [blocks, setBlocks] = useState(INITIAL_BLOCKS)
   const handleDeleteBlock = useCallback((id: string) => {
-    setBlocks((blocks) => {
+    setBlocks((blocks: BlockI[]) => {
       return blocks.filter((block) => block.id !== id)
     })
   }, [])
