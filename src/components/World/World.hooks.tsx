@@ -7,6 +7,12 @@ import {
   isPlayerOutOfBoundsForX,
   isPlayerOutOfBoundsForY,
 } from './World.helpers'
+import {
+  useClearCanvas,
+  useFitCanvasToScreen,
+} from '@/components/Canvas/Canvas.hooks'
+import { usePlayerRenderer } from '@/components/Player/PlayerRenderer'
+import { useBlockRenderer } from '@/components/Block/BlockRenderer'
 
 export function useGameLoop() {
   const {
@@ -80,4 +86,22 @@ export function useGameLoop() {
     updatePlayerPosition,
     updatePlayerVelocity,
   ])
+}
+
+/**
+ * Hook used to render the players and blocks on the canvas.
+ */
+export function useWorldRenderer(
+  canvasRef: React.RefObject<HTMLCanvasElement>,
+) {
+  const { blocks, players } = useGameState()
+  // Used to resize the canvas to take up the entire screen
+  useFitCanvasToScreen(canvasRef)
+
+  // Used to clear the canvas before rendering the players and blocks
+  useClearCanvas(canvasRef)
+
+  // These hooks are responsible for rendering the players and blocks on the canvas
+  usePlayerRenderer(canvasRef, players)
+  useBlockRenderer(canvasRef, blocks)
 }
