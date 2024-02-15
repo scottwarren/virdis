@@ -1,4 +1,5 @@
 import { DEFAULT_BLOCK_SIZE } from '@/models/Block/Block'
+import { DEFAULT_PLAYER_SIZE_PX } from '@/models/Player/Player'
 import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
 
 /**
@@ -54,13 +55,13 @@ export function blockHitDetection(
 ) {
   const blockXEnd = blockX + DEFAULT_BLOCK_SIZE
   const blockYEnd = blockY + DEFAULT_BLOCK_SIZE
+  const playerXEnd = playerX + DEFAULT_PLAYER_SIZE_PX
+  const playerYEnd = playerY + DEFAULT_PLAYER_SIZE_PX
 
-  if (playerX >= blockX && playerX <= blockXEnd) {
-    return true
-  }
-
-  if (playerY >= blockYEnd && playerY <= blockYEnd) {
-    return true
+  if (playerXEnd >= blockX && playerXEnd <= blockXEnd) {
+    if (playerYEnd >= blockY && playerYEnd <= blockYEnd) {
+      return true
+    }
   }
 
   return false

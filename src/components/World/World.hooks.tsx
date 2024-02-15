@@ -1,6 +1,9 @@
 import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
 import { useEffect, useState } from 'react'
-import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '@/models/Player/Player'
+import {
+  DEFAULT_PLAYER_SIZE_PX,
+  DEFAULT_PLAYER_VELOCITY_PER_TICK,
+} from '@/models/Player/Player'
 import { SECONDS_PER_TICK } from '@/models/World/World'
 import {
   blockHitDetection,
@@ -34,6 +37,7 @@ export function useGameLoop(frameTime: number) {
     updatePlayerPosition,
     updatePlayerVelocity,
     gamePaused,
+    deleteBlock,
   } = useGameState()
 
   useEffect(() => {
@@ -43,33 +47,32 @@ export function useGameLoop(frameTime: number) {
         const [x, y] = player.position
         const [xVelocity, yVelocity] = player.velocity
 
-        blocks.forEach((block) => {
+        const hitBlocks = blocks.filter((block) => {
           const isPlayerHittingBlock = blockHitDetection(
             player.position,
             block.position,
           )
 
           if (!isPlayerHittingBlock) {
-            return
+            return false
           }
 
           // delete the block
-          // invert the velocity
+          deleteBlock(block.id)
+
+          return true
         })
+
+        const didPlayerHitBlock = hitBlocks.length > 0
 
         const outOfBoundsX = isPlayerOutOfBoundsForX(x)
         const outOfBoundsY = isPlayerOutOfBoundsForY(y)
 
-        const newXVelocity = outOfBoundsX ? xVelocity * -1 : xVelocity
-        const newYVelocity = outOfBoundsY ? yVelocity * -1 : yVelocity
+        const shouldInvertXVelocity = outOfBoundsX || didPlayerHitBlock
+        const shouldInvertYVelocity = outOfBoundsY || didPlayerHitBlock
 
-        // TODO: determine whether the player is hitting a block
-        // If it currently is, we need to figure out _which block it was hitting to remove it
-        // once we determine the ID/which block we're hitting, remove it from the state
-
-        // TODO: extract the out of bounds checks into their own function
-        // so that we can check first out of bounds, then we can check if they're hitting
-        // an entity
+        const newXVelocity = shouldInvertXVelocity ? xVelocity * -1 : xVelocity
+        const newYVelocity = shouldInvertYVelocity ? yVelocity * -1 : yVelocity
 
         // Trigger an update of the player's velocity within the game state
         updatePlayerVelocity(player.id, [newXVelocity, newYVelocity])
@@ -79,8 +82,8 @@ export function useGameLoop(frameTime: number) {
 
         // If the player is out of bounds, we want to invert its direction of movement
         // on the axis that it is out of bounds
-        const newX = outOfBoundsX ? x - xMovement : x + xMovement
-        const newY = outOfBoundsY ? y - yMovement : y + yMovement
+        const newX = shouldInvertXVelocity ? x - xMovement : x + xMovement
+        const newY = shouldInvertYVelocity ? y - yMovement : y + yMovement
 
         updatePlayerPosition(player.id, [newX, newY])
       })
@@ -94,6 +97,8 @@ export function useGameLoop(frameTime: number) {
     // Cleanup the timeout upon unmount to prevent memory leaks.
     return () => window.clearInterval(gameLoopIntervalID)
   }, [
+    blocks,
+    deleteBlock,
     frameTime,
     gamePaused,
     players,
