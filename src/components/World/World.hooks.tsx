@@ -11,26 +11,7 @@ import {
   isPlayerOutOfBoundsForY,
 } from './World.helpers'
 
-/**
- * Hook that returns the current frame time
- *
- * @source: https://medium.com/projector-hq/writing-a-run-loop-in-javascript-react-9605f74174b
- */
-export function useFrameTime() {
-  const [frameTime, setFrameTime] = useState(0)
-
-  useEffect(() => {
-    const frameId = requestAnimationFrame(() => {
-      setFrameTime(performance.now())
-    })
-
-    return () => cancelAnimationFrame(frameId)
-  }, [])
-
-  return frameTime
-}
-
-export function useGameLoop(frameTime: number) {
+export function useGameLoop() {
   const {
     blocks,
     players,
@@ -53,14 +34,12 @@ export function useGameLoop(frameTime: number) {
             block.position,
           )
 
-          if (!isPlayerHittingBlock) {
-            return false
+          if (isPlayerHittingBlock) {
+            deleteBlock(block.id)
+            return true
           }
 
-          // delete the block
-          deleteBlock(block.id)
-
-          return true
+          return false
         })
 
         const didPlayerHitBlock = hitBlocks.length > 0
@@ -99,7 +78,6 @@ export function useGameLoop(frameTime: number) {
   }, [
     blocks,
     deleteBlock,
-    frameTime,
     gamePaused,
     players,
     updatePlayerPosition,

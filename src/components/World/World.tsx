@@ -1,12 +1,11 @@
 import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
 import { Player } from '@/components/Player/Player'
-import { useFrameTime, useGameLoop } from './World.hooks'
+import { useGameLoop } from './World.hooks'
 import { Block } from '@/components/Block/Block'
 
 export function World() {
-  const { blocks, players, setGamePaused, gamePaused } = useGameState()
-  const frameTime = useFrameTime()
-  useGameLoop(frameTime)
+  const { blocks, players } = useGameState()
+  useGameLoop()
 
   return (
     <div className='flex min-h-screen w-screen'>
