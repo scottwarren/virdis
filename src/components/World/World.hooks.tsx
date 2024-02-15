@@ -84,12 +84,3 @@ export function useGameLoop() {
     updatePlayerVelocity,
   ])
 }
-
-// collision detection:
-// todo: figure out if this should include the edges of the screen (i.e. out of bounds detection)
-
-// pseudo code
-// get list of current blocks
-// get pos for each of the blocks
-// check if the player is overlapping with the block's position
-//
