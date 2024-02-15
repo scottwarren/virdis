@@ -18,14 +18,6 @@ export function World() {
         const [x, y] = block.position
         return <Block key={block.id} x={x} y={y} />
       })}
-      <div className='flex flex-row justify-end'>
-        <button
-          className='text-white'
-          onClick={() => setGamePaused(!gamePaused)}
-        >
-          {gamePaused ? 'Continue game' : 'Pause Game'}
-        </button>
-      </div>
     </div>
   )
 }
