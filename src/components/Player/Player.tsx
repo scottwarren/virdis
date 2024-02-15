@@ -9,7 +9,6 @@ export function Player({ x, y }: ComponentProps) {
   // Used to position the player on the screen
   const style = useMemo(() => {
     return {
-      ...DEFAULT_STYLES,
       transform: `translate(${x}px, ${y}px)`,
     }
   }, [x, y])
@@ -17,15 +16,13 @@ export function Player({ x, y }: ComponentProps) {
   return (
     <div
       style={style}
-      className={`w[${DEFAULT_PLAYER_SIZE_PX}px] h[${DEFAULT_PLAYER_SIZE_PX}px] rounded-full bg-green-800`}
+      className={`${HEIGHT_CLASS} ${WIDTH_CLASS} rounded-full bg-green-800`}
     />
   )
 }
 
-const DEFAULT_STYLES = {
-  height: `${DEFAULT_PLAYER_SIZE_PX}px`,
-  width: `${DEFAULT_PLAYER_SIZE_PX}px`,
-}
+const HEIGHT_CLASS = `h-[${DEFAULT_PLAYER_SIZE_PX}px]`
+const WIDTH_CLASS = `w-[${DEFAULT_PLAYER_SIZE_PX}px]`
 
 interface ComponentProps {
   /** X position of the player */
