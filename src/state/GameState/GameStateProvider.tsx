@@ -17,7 +17,7 @@ export function GameStateProvider({ children }: ComponentProps) {
   const player1 = usePlayer()
 
   const [gamePaused, setGamePaused] = useState(false)
-  const [blocks, setBlocks] = useState(generateBlocks(1))
+  const [blocks, setBlocks] = useState(INITIAL_BLOCKS)
   const handleDeleteBlock = useCallback((id: string) => {
     setBlocks((blocks) => {
       return blocks.filter((block) => block.id !== id)
@@ -87,6 +87,8 @@ export function GameStateProvider({ children }: ComponentProps) {
     </GameStateContext.Provider>
   )
 }
+
+const INITIAL_BLOCKS = generateBlocks(20)
 
 interface ComponentProps {
   children: React.ReactNode
