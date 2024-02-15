@@ -7,7 +7,7 @@ export interface BlockI {
 }
 
 // The width/height of a block.
-export const DEFAULT_BLOCK_SIZE = 45
+export const DEFAULT_BLOCK_SIZE = 25
 
 /**
  * Function used to generate n number of blocks.
