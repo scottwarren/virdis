@@ -40,8 +40,8 @@ export function generatePseudoRandomPosition(): BlockI['position'] {
 
   // Using the min of DEFAULT_BLOCK_SIZE for the same reason as above,
   // We don't want the blocks to be generated outside of the screen
-  const x = randomIntFromInterval(DEFAULT_BLOCK_SIZE, MAX_BLOCK_X)
-  const y = randomIntFromInterval(DEFAULT_BLOCK_SIZE, MAX_BLOCK_Y)
+  const x = getRandomInt(DEFAULT_BLOCK_SIZE, MAX_BLOCK_X)
+  const y = getRandomInt(DEFAULT_BLOCK_SIZE, MAX_BLOCK_Y)
 
   console.log('x', x, 'y', y)
 
@@ -49,17 +49,14 @@ export function generatePseudoRandomPosition(): BlockI['position'] {
 }
 
 /**
- * Function to generate a random integer between min and max.
- *
- * @returns a random integer between min and max (inclusive of min and max)
- *
- * @see https://stackoverflow.com/a/7228322
+ * Returns a random integer between min (inclusive) and max (inclusive).
+ * The value is no lower than min (or the next integer greater than min
+ * if min isn't an integer) and no greater than max (or the next integer
+ * lower than max if max isn't an integer).
+ * Using Math.round() will give you a non-uniform distribution!
  */
-function randomIntFromInterval(min: number, max: number) {
-  // Rouding up the min, otherwise we could get a number less than min
-  // same for max, we round down to avoid getting a number greater than max
-  const minInt = Math.ceil(min)
-  const maxInt = Math.floor(max)
-
-  return Math.floor(Math.random() * (max - min + 1) + min)
+function getRandomInt(min: number, max: number) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
