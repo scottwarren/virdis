@@ -30,29 +30,6 @@ export function GameStateProvider({ children }: ComponentProps) {
     }
   }, [player1])
 
-  const updatePlayer = useCallback(
-    (id: string, update: PlayerUpdateT) => {
-      const player = players[id]
-
-      if (!player) {
-        return console.error(`Player with id ${id} not found`)
-      }
-
-      if (update.position) {
-        player.updatePlayerPosition(update.position)
-      }
-
-      if (update.velocity) {
-        player.updatePlayerVelocity(update.velocity)
-      }
-
-      if (update.score) {
-        player.updatePlayerScore(update.score)
-      }
-    },
-    [players],
-  )
-
   const state = useMemo((): GameStateI => {
     return {
       players: [player1.player],
