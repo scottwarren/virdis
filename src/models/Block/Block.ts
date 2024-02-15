@@ -33,8 +33,10 @@ export function generateBlocks(numberOfBlocks: number) {
 export function generatePseudoRandomPosition(): BlockI['position'] {
   // We don't want the blocks to be generated outside of the screen
   // therefore we use the block size to calculate the maximum X and Y
-  const MAX_BLOCK_X = document.body.clientWidth - DEFAULT_BLOCK_SIZE
-  const MAX_BLOCK_Y = document.body.clientHeight - DEFAULT_BLOCK_SIZE
+  const MAX_BLOCK_X = window.innerWidth - DEFAULT_BLOCK_SIZE
+  // Using window.innerHeight because the other options I've tried are not reliable (e.g. document.body.scrollHeight)
+  // and either return 0 or are not the actual height of the viewport.
+  const MAX_BLOCK_Y = window.innerHeight - DEFAULT_BLOCK_SIZE
 
   // Using the min of DEFAULT_BLOCK_SIZE for the same reason as above,
   // We don't want the blocks to be generated outside of the screen
