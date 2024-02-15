@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "//dev": "TODO: Eject from next, as this is a client side only project",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
