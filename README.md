@@ -16,6 +16,7 @@ While building this, I wanted to focus on some areas to either learn about or br
 1. Game loop (in general, but more specifically, how to implement one in React)
 1. React Context.
 1. How to structure a project that is not a simple CRUD app.
+1. Canvas :) -- I originally built this using divs which with hindsight is a bit silly, but it now uses Canvas.
 
 ## Local Dev
 
