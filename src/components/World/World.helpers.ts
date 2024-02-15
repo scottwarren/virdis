@@ -45,7 +45,7 @@ export function isPlayerOutOfBoundsForY(y: number) {
 }
 
 /**
- * Function used to detect if a player is interacting with a block.
+ * Function used to detect if a player is colliding with a block.
  *
  * @returns Boolean
  */
