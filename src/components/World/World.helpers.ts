@@ -61,10 +61,13 @@ export function blockHitDetection(
   const playerXEnd = playerX + DEFAULT_PLAYER_SIZE_PX
   const playerYEnd = playerY + DEFAULT_PLAYER_SIZE_PX
 
-  if (playerXEnd >= blockX && playerXEnd <= blockXEnd) {
-    if (playerYEnd >= blockY && playerYEnd <= blockYEnd) {
-      return true
-    }
+  if (
+    playerXEnd >= blockX &&
+    playerXEnd <= blockXEnd &&
+    playerYEnd >= blockY &&
+    playerYEnd <= blockYEnd
+  ) {
+    return true
   }
 
   return false
