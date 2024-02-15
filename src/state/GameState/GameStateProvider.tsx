@@ -79,7 +79,7 @@ export function GameStateProvider({ children }: ComponentProps) {
         player.updatePlayerPosition(position)
       },
     }
-  }, [gamePaused, blocks, player1.player, players])
+  }, [player1.player, gamePaused, handleDeleteBlock, blocks, players])
 
   return (
     <GameStateContext.Provider value={state}>
