@@ -43,8 +43,6 @@ export function generatePseudoRandomPosition(): BlockI['position'] {
   const x = getRandomInt(DEFAULT_BLOCK_SIZE, MAX_BLOCK_X)
   const y = getRandomInt(DEFAULT_BLOCK_SIZE, MAX_BLOCK_Y)
 
-  console.log('x', x, 'y', y)
-
   return [x, y]
 }
 
