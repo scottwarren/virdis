@@ -14,7 +14,7 @@ export function World() {
 
   // These hooks are responsible for rendering the players and blocks on the canvas
   usePlayerRenderer(canvasRef, players)
-  useBlockRenderer(canvasRef, players)
+  useBlockRenderer(canvasRef, blocks)
 
   return (
     <canvas
