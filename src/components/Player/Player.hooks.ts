@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
-import { PlayerI } from '../../models/Player/Player'
+import { PlayerI } from '@/models/Player/Player'
 import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '@/models/Player/Player'
 import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
 

@@ -1,9 +1,6 @@
 import { useGameState } from '@/state/GameState/GameStateProvider.hooks'
-import { useEffect, useState } from 'react'
-import {
-  DEFAULT_PLAYER_SIZE_PX,
-  DEFAULT_PLAYER_VELOCITY_PER_TICK,
-} from '@/models/Player/Player'
+import { useEffect } from 'react'
+import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '@/models/Player/Player'
 import { SECONDS_PER_TICK } from '@/models/World/World'
 import {
   blockHitDetection,
