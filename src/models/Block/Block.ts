@@ -38,9 +38,12 @@ export function generatePseudoRandomPosition(): BlockI['position'] {
   // and either return 0 or are not the actual height of the viewport.
   const MAX_BLOCK_Y = window.innerHeight - DEFAULT_BLOCK_SIZE
 
+  // I want to fill the second half of the screen with blocks.
+  const MIN_BLOCK_X = Math.ceil(MAX_BLOCK_X / 2)
+
   // Using the min of DEFAULT_BLOCK_SIZE for the same reason as above,
   // We don't want the blocks to be generated outside of the screen
-  const x = getRandomInt(DEFAULT_BLOCK_SIZE, MAX_BLOCK_X)
+  const x = getRandomInt(MIN_BLOCK_X, MAX_BLOCK_X)
   const y = getRandomInt(DEFAULT_BLOCK_SIZE, MAX_BLOCK_Y)
 
   return [x, y]
