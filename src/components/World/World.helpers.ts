@@ -53,8 +53,11 @@ export function blockHitDetection(
   [playerX, playerY]: [number, number],
   [blockX, blockY]: [number, number],
 ) {
+  // We need to check if the player is within the block's area, so we need the 0, 0 position of the block and the end position.
   const blockXEnd = blockX + DEFAULT_BLOCK_SIZE
   const blockYEnd = blockY + DEFAULT_BLOCK_SIZE
+
+  // We want to use the bottom right corner of the player to check for collision.
   const playerXEnd = playerX + DEFAULT_PLAYER_SIZE_PX
   const playerYEnd = playerY + DEFAULT_PLAYER_SIZE_PX
 
