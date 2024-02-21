@@ -13,6 +13,9 @@ export const INITIAL_STATE: GameStateI = {
   updatePlayerPosition: () => {
     throw new Error('updatePlayerPosition() not implemented')
   },
+  updatePlayerScore: () => {
+    throw new Error('updatePlayerScore() not implemented')
+  },
   updatePlayerVelocity: () => {
     throw new Error('updatePlayerVelocity() not implemented')
   },

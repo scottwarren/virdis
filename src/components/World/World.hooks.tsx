@@ -18,6 +18,7 @@ export function useGameLoop() {
     players,
     updatePlayerPosition,
     updatePlayerVelocity,
+    updatePlayerScore,
     gamePaused,
     deleteBlock,
   } = useGameState()
@@ -37,6 +38,7 @@ export function useGameLoop() {
 
           if (isPlayerHittingBlock) {
             deleteBlock(block.id)
+            updatePlayerScore(player.id, player.score + 1)
             return true
           }
 
@@ -82,6 +84,7 @@ export function useGameLoop() {
     gamePaused,
     players,
     updatePlayerPosition,
+    updatePlayerScore,
     updatePlayerVelocity,
   ])
 }

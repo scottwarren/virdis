@@ -37,6 +37,15 @@ export function GameStateProvider({ children }: ComponentProps) {
       deleteBlock: handleDeleteBlock,
       blocks,
       setGamePaused,
+      updatePlayerScore: (id: string, score: number) => {
+        const player = players[id]
+
+        if (!player) {
+          return console.error(`Player with id ${id} not found`)
+        }
+
+        player.updatePlayerScore(score)
+      },
       updatePlayerVelocity: (id: string, velocity: [number, number]) => {
         const player = players[id]
 
