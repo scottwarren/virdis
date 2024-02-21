@@ -37,12 +37,11 @@ export function useGameLoop() {
           )
 
           if (isPlayerHittingBlock) {
-            deleteBlock(block.id)
             updatePlayerScore(player.id, player.score + 1)
-            return true
+            deleteBlock(block.id)
           }
 
-          return false
+          return isPlayerHittingBlock
         })
 
         const didPlayerHitBlock = hitBlocks.length > 0
