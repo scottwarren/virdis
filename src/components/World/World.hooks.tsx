@@ -96,10 +96,6 @@ export function useWorldRenderer(
   // Used to resize the canvas to take up the entire screen
   useFitCanvasToScreen(canvasRef)
 
-  const canvas = canvasRef.current
-
-  const context = canvas?.getContext('2d')
-
   // Renders the players and the blocks on the canvas
   useEffect(() => {
     const canvas = canvasRef.current
@@ -132,11 +128,4 @@ export function useWorldRenderer(
       drawBlock(context, block)
     })
   }, [blocks, canvasRef, players])
-
-  if (context && canvas) {
-    clearCanvas(context, {
-      width: canvas.width,
-      height: canvas.height,
-    })
-  }
 }
