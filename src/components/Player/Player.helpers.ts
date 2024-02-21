@@ -10,11 +10,7 @@ export function drawPlayer(context: CanvasRenderingContext2D, player: PlayerI) {
 
   context.beginPath()
 
-  // By default the arc is drawn from the centre of the x, y, which makes collision detection harder. We want the arc to be drawn from the top left.
-  const circleX = x - DEFAULT_PLAYER_SIZE_PX / 2
-  const circleY = y - DEFAULT_PLAYER_SIZE_PX / 2
-
-  arcTopLeft(context, circleX, circleY, DEFAULT_PLAYER_SIZE_PX)
+  arcTopLeft(context, x, y, DEFAULT_PLAYER_SIZE_PX)
 
   context.fill()
 }
