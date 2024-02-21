@@ -7,12 +7,10 @@ import {
   isPlayerOutOfBoundsForX,
   isPlayerOutOfBoundsForY,
 } from './World.helpers'
-import {
-  useClearCanvas,
-  useFitCanvasToScreen,
-} from '@/components/Canvas/Canvas.hooks'
-import { usePlayerRenderer } from '@/components/Player/PlayerRenderer'
-import { useBlockRenderer } from '@/components/Block/BlockRenderer'
+import { useFitCanvasToScreen } from '@/components/Canvas/Canvas.hooks'
+import { drawPlayer } from '@/components/Player/Player.helpers'
+import { drawBlock } from '@/components/Block/Block.helpers'
+import { clearCanvas } from '../Canvas/Canvas.helpers'
 
 export function useGameLoop() {
   const {
@@ -98,10 +96,47 @@ export function useWorldRenderer(
   // Used to resize the canvas to take up the entire screen
   useFitCanvasToScreen(canvasRef)
 
-  // Used to clear the canvas before rendering the players and blocks
-  useClearCanvas(canvasRef)
+  const canvas = canvasRef.current
 
-  // These hooks are responsible for rendering the players and blocks on the canvas
-  usePlayerRenderer(canvasRef, players)
-  useBlockRenderer(canvasRef, blocks)
+  const context = canvas?.getContext('2d')
+
+  // Renders the players and the blocks on the canvas
+  useEffect(() => {
+    const canvas = canvasRef.current
+
+    if (!canvas) {
+      console.log('Canvas not found')
+      return
+    }
+
+    const context = canvas.getContext('2d')
+
+    if (!context) {
+      console.log('Canvas context not found')
+      return
+    }
+
+    // Clear the canvas before rendering the players and blocks, since we can't move an entiy within the canvas, therefore we have to clear the canvas and redraw the frame.
+    clearCanvas(context, {
+      width: canvas.width,
+      height: canvas.height,
+    })
+
+    // Render the players
+    players.forEach((player) => {
+      drawPlayer(context, player)
+    })
+
+    // Render the blocks
+    blocks.forEach((block) => {
+      drawBlock(context, block)
+    })
+  }, [blocks, canvasRef, players])
+
+  if (context && canvas) {
+    clearCanvas(context, {
+      width: canvas.width,
+      height: canvas.height,
+    })
+  }
 }
