@@ -2,10 +2,9 @@ import { useRef } from 'react'
 import { useGameLoop, useWorldRenderer } from './World.hooks'
 
 export function World() {
-  useGameLoop()
-
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
+  useGameLoop()
   useWorldRenderer(canvasRef)
 
   return (
