@@ -10,7 +10,9 @@ import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
 export function isPlayerOutOfBoundsForX(x: number) {
   const xMin = 0
 
-  const xMax = document.body.clientWidth - X_EDGE_BUFFER
+  const bodyWidth = Math.max(document.body.clientWidth, window.innerWidth)
+
+  const xMax = bodyWidth - X_EDGE_BUFFER
 
   if (x > xMax) {
     return true
@@ -31,7 +33,9 @@ export function isPlayerOutOfBoundsForX(x: number) {
 export function isPlayerOutOfBoundsForY(y: number) {
   const yMin = 0
 
-  const yMax = document.body.clientHeight - Y_EDGE_BUFFER
+  const bodyHeight = Math.max(document.body.clientHeight, window.innerHeight)
+
+  const yMax = bodyHeight - Y_EDGE_BUFFER
 
   if (y > yMax) {
     return true
