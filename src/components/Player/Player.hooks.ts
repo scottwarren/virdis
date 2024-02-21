@@ -1,18 +1,16 @@
 import { useMemo, useRef, useState } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
-import { PlayerI } from '@/models/Player/Player'
-import { DEFAULT_PLAYER_VELOCITY_PER_TICK } from '@/models/Player/Player'
-import { X_EDGE_BUFFER, Y_EDGE_BUFFER } from '@/models/World/World'
+import {
+  DEFAULT_PLAYER_VELOCITY_PER_TICK,
+  PlayerI,
+} from '@/models/Player/Player'
 
 export function usePlayer() {
   // The ref to store the ID of the player.
   const idRef = useRef(uuidv4())
 
-  const [position, setPosition] = useState<[number, number]>([
-    X_EDGE_BUFFER,
-    Y_EDGE_BUFFER,
-  ])
+  const [position, setPosition] = useState<[number, number]>([0, 0])
   const [score, setScore] = useState<number>(0)
   const [velocity, setVelocity] = useState<[number, number]>([
     DEFAULT_PLAYER_VELOCITY_PER_TICK,
