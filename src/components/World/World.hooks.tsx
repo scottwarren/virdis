@@ -52,6 +52,14 @@ export function useGameLoop() {
         const shouldInvertXVelocity = outOfBoundsX || didPlayerHitBlock
         const shouldInvertYVelocity = outOfBoundsY || didPlayerHitBlock
 
+        // TODO: calculate based on the player's velocity, the angle in which it is currently moving
+        // then calculate the _new_ angle that it should be moving based on the collision
+        // then calculate the new velocity for x and y based on the new angle
+        // My current understanding:
+        // angle of the player's movement can be calculated using the velocity
+        // new angle would be an inverse of the current angle (i.e. 90 +/- current angle -- +/- depends on the direction of the collision)
+        // new velocity = cos(new angle) * current velocity I think?
+
         const newXVelocity = shouldInvertXVelocity ? xVelocity * -1 : xVelocity
         const newYVelocity = shouldInvertYVelocity ? yVelocity * -1 : yVelocity
 
